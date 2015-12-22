@@ -1,0 +1,14 @@
+couchdb:
+  build: docker/couchdb
+osmium:
+  build: docker/osmium
+  ports:
+    - "5984:5984"
+webservice:
+  build: docker/webservice
+  links:
+    - couchdb
+    - osmium
+  ports:
+    - "9090:9090"
+  env_file: .env
